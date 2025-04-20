@@ -80,7 +80,10 @@ def evaluate(config, model_path, results_dir='results'):
     )
     
     # Load model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    device = (
+        torch.device('mps') if torch.backends.mps.is_available() 
+        else torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    )
     model = load_model(config, model_path)
     model = model.to(device)
     

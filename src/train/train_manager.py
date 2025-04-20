@@ -54,7 +54,10 @@ class TrainingManager:
         
     def setup_device(self):
         """Setup computing device"""
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = (
+            torch.device('mps') if torch.backends.mps.is_available() 
+            else torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        )
         self.logger.info(f"Using device: {self.device}")
         
         if self.device.type == 'cpu':

@@ -2,25 +2,25 @@
 data:
   dataset_root: "." # Using relative paths
   # 2017 Dataset
-  # train_2017:
-  #   images: "dataset/2017/ISIC-2017_Training_Data.zip"
-  #   labels: "dataset/2017/ISIC-2017_Training_Part3_GroundTruth.csv"
-  # val_2017:
-  #   images: "dataset/2017/ISIC-2017_Validation_Data.zip"
-  #   labels: "dataset/2017/ISIC-2017_Validation_Part3_GroundTruth.csv"
-  # test_2017:
-  #   images: "dataset/2017/ISIC-2017_Test_v2_Data.zip"
-  #   labels: "dataset/2017/ISIC-2017_Test_v2_Part3_GroundTruth.csv"
+  train_2017:
+    images: "dataset/2017/ISIC-2017_Training_Data.zip"
+    labels: "dataset/2017/ISIC-2017_Training_Part3_GroundTruth.csv"
+  val_2017:
+    images: "dataset/2017/ISIC-2017_Validation_Data.zip"
+    labels: "dataset/2017/ISIC-2017_Validation_Part3_GroundTruth.csv"
+  test_2017:
+    images: "dataset/2017/ISIC-2017_Test_v2_Data.zip"
+    labels: "dataset/2017/ISIC-2017_Test_v2_Part3_GroundTruth.csv"
   # 2018 Dataset - Task 3 (Classification task)
-  train_2018:
-    images: "dataset/2018/ISIC2018_Task3_Training_Input.zip"
-    labels: "dataset/2018/ISIC2018_Task3_Training_GroundTruth.zip"
-  val_2018:
-    images: "dataset/2018/ISIC2018_Task3_Validation_Input.zip"
-    labels: "dataset/2018/ISIC2018_Task3_Validation_GroundTruth.zip"
-  test_2018:
-    images: "dataset/2018/ISIC2018_Task3_Test_Input.zip"
-    labels: "dataset/2018/ISIC2018_Task3_Test_GroundTruth.zip"
+  # train_2018:
+  #   images: "dataset/2018/ISIC2018_Task3_Training_Input.zip"
+  #   labels: "dataset/2018/ISIC2018_Task3_Training_GroundTruth.zip"
+  # val_2018:
+  #   images: "dataset/2018/ISIC2018_Task3_Validation_Input.zip"
+  #   labels: "dataset/2018/ISIC2018_Task3_Validation_GroundTruth.zip"
+  # test_2018:
+  #   images: "dataset/2018/ISIC2018_Task3_Test_Input.zip"
+  #   labels: "dataset/2018/ISIC2018_Task3_Test_GroundTruth.zip"
 
   # Optimized settings for CPU
   image_size: [160, 160] # Reduced size for faster processing
@@ -37,7 +37,7 @@ model:
 
 # Training Configuration
 training:
-  epochs: 50 # Reduced number of epochs
+  epochs: 25 # Reduced number of epochs
   learning_rate: 0.001
   weight_decay: 0.0001
   mixed_precision: false # Disable mixed precision for CPU

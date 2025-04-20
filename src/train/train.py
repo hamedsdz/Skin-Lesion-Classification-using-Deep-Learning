@@ -65,38 +65,38 @@ def create_datasets(config, transforms_train, transforms_val):
         print(f"Labels: {dataset_root / config['data']['train_2017']['labels']}")
     
     # 2018 Dataset
-    try:
-        train_2018 = ISICDataset(
-            dataset_root / config['data']['train_2018']['images'],
-            dataset_root / config['data']['train_2018']['labels'],
-            transform=transforms_train,
-            year=2018
-        )
-        datasets['train'].append(train_2018)
-        print(f"Loaded 2018 training dataset: {len(train_2018)} samples")
+    # try:
+    #     train_2018 = ISICDataset(
+    #         dataset_root / config['data']['train_2018']['images'],
+    #         dataset_root / config['data']['train_2018']['labels'],
+    #         transform=transforms_train,
+    #         year=2018
+    #     )
+    #     datasets['train'].append(train_2018)
+    #     print(f"Loaded 2018 training dataset: {len(train_2018)} samples")
         
-        val_2018 = ISICDataset(
-            dataset_root / config['data']['val_2018']['images'],
-            dataset_root / config['data']['val_2018']['labels'],
-            transform=transforms_val,
-            year=2018
-        )
-        datasets['val'].append(val_2018)
-        print(f"Loaded 2018 validation dataset: {len(val_2018)} samples")
+    #     val_2018 = ISICDataset(
+    #         dataset_root / config['data']['val_2018']['images'],
+    #         dataset_root / config['data']['val_2018']['labels'],
+    #         transform=transforms_val,
+    #         year=2018
+    #     )
+    #     datasets['val'].append(val_2018)
+    #     print(f"Loaded 2018 validation dataset: {len(val_2018)} samples")
         
-        test_2018 = ISICDataset(
-            dataset_root / config['data']['test_2018']['images'],
-            dataset_root / config['data']['test_2018']['labels'],
-            transform=transforms_val,
-            year=2018
-        )
-        datasets['test'].append(test_2018)
-        print(f"Loaded 2018 test dataset: {len(test_2018)} samples")
-    except Exception as e:
-        print(f"Warning: Could not load 2018 dataset: {e}")
-        print(f"Attempted paths:")
-        print(f"Train: {dataset_root / config['data']['train_2018']['images']}")
-        print(f"Labels: {dataset_root / config['data']['train_2018']['labels']}")
+    #     test_2018 = ISICDataset(
+    #         dataset_root / config['data']['test_2018']['images'],
+    #         dataset_root / config['data']['test_2018']['labels'],
+    #         transform=transforms_val,
+    #         year=2018
+    #     )
+    #     datasets['test'].append(test_2018)
+    #     print(f"Loaded 2018 test dataset: {len(test_2018)} samples")
+    # except Exception as e:
+    #     print(f"Warning: Could not load 2018 dataset: {e}")
+    #     print(f"Attempted paths:")
+    #     print(f"Train: {dataset_root / config['data']['train_2018']['images']}")
+    #     print(f"Labels: {dataset_root / config['data']['train_2018']['labels']}")
     
     # Verify we have data
     if not datasets['train']:
@@ -119,7 +119,10 @@ def main():
     writer = SummaryWriter(log_dir=log_dir)
     
     # Setup device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = (
+        torch.device('mps') if torch.backends.mps.is_available() 
+        else torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    )
     logger.info(f"Using device: {device}")
     
     # Create transforms
