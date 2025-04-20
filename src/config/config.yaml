@@ -1,0 +1,107 @@
+# Data Configuration
+data:
+  dataset_root: "." # Using relative paths
+  # 2017 Dataset
+  # train_2017:
+  #   images: "dataset/2017/ISIC-2017_Training_Data.zip"
+  #   labels: "dataset/2017/ISIC-2017_Training_Part3_GroundTruth.csv"
+  # val_2017:
+  #   images: "dataset/2017/ISIC-2017_Validation_Data.zip"
+  #   labels: "dataset/2017/ISIC-2017_Validation_Part3_GroundTruth.csv"
+  # test_2017:
+  #   images: "dataset/2017/ISIC-2017_Test_v2_Data.zip"
+  #   labels: "dataset/2017/ISIC-2017_Test_v2_Part3_GroundTruth.csv"
+  # 2018 Dataset - Task 3 (Classification task)
+  train_2018:
+    images: "dataset/2018/ISIC2018_Task3_Training_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Training_GroundTruth.zip"
+  val_2018:
+    images: "dataset/2018/ISIC2018_Task3_Validation_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Validation_GroundTruth.zip"
+  test_2018:
+    images: "dataset/2018/ISIC2018_Task3_Test_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Test_GroundTruth.zip"
+
+  # Optimized settings for CPU
+  image_size: [160, 160] # Reduced size for faster processing
+  batch_size: 16 # Smaller batch size for CPU
+  num_workers: 0 # Single worker to avoid overhead
+  pin_memory: false # Disable pin_memory since we're using CPU
+
+# Model Configuration
+model:
+  name: "EfficientNetB0" # Smaller model for CPU
+  pretrained: true
+  num_classes: 7
+  dropout_rate: 0.4
+
+# Training Configuration
+training:
+  epochs: 50 # Reduced number of epochs
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  mixed_precision: false # Disable mixed precision for CPU
+  scheduler:
+    name: "ReduceLROnPlateau"
+    patience: 5
+    factor: 0.1
+  early_stopping:
+    patience: 10
+    min_delta: 0.001
+
+# Augmentation Configuration
+augmentation:
+  train:
+    horizontal_flip: true
+    vertical_flip: true
+    random_rotation: 20
+    random_brightness_contrast: true
+    normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+  val:
+    normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+# Logging Configuration
+logging:
+  log_dir: "logs"
+  save_dir: "models"
+  experiment_name: "skin_lesion_classifier_combined"
+  save_frequency: 5 # Save metrics every N epochs
+
+# Results Configuration
+results:
+  export_dir: "results"
+  save_predictions: true
+  generate_plots: true
+  metrics_to_track:
+    - accuracy
+    - precision
+    - recall
+    - f1
+    - loss
+    - confusion_matrix
+    - roc_curve
+
+# Classes (ISIC Combined Dataset Classes)
+classes:
+  - "Melanoma" # MEL
+  - "Nevus" # NV
+  - "Basal Cell Carcinoma" # BCC
+  - "Actinic Keratosis" # AK
+  - "Benign Keratosis" # BKL
+  - "Dermatofibroma" # DF
+  - "Vascular Lesion" # VASC
+
+# Checkpointing
+checkpoint:
+  save_freq: 5 # Save checkpoint every N epochs
+  resume: false # Whether to resume from checkpoint
+  path: "models/checkpoints/latest.pth" # Path to checkpoint file
+
+# Memory management
+memory:
+  clear_cache_frequency: 10 # Clear CUDA cache every N batches
+  gc_frequency: 1 # Run garbage collection every N epochs
