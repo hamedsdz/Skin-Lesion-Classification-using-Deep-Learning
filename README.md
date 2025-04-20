@@ -84,8 +84,4 @@ The model uses:
 Training metrics and model checkpoints are saved in:
 - logs/ directory for TensorBoard logs
 - models/ directory for model checkpoints
-
-## License
-
-[Your License Here]
-
+- 
