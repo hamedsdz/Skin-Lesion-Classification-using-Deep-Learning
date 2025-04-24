@@ -12,15 +12,15 @@ data:
     images: "dataset/2017/ISIC-2017_Test_v2_Data.zip"
     labels: "dataset/2017/ISIC-2017_Test_v2_Part3_GroundTruth.csv"
   # 2018 Dataset - Task 3 (Classification task)
-  # train_2018:
-  #   images: "dataset/2018/ISIC2018_Task3_Training_Input.zip"
-  #   labels: "dataset/2018/ISIC2018_Task3_Training_GroundTruth.zip"
-  # val_2018:
-  #   images: "dataset/2018/ISIC2018_Task3_Validation_Input.zip"
-  #   labels: "dataset/2018/ISIC2018_Task3_Validation_GroundTruth.zip"
-  # test_2018:
-  #   images: "dataset/2018/ISIC2018_Task3_Test_Input.zip"
-  #   labels: "dataset/2018/ISIC2018_Task3_Test_GroundTruth.zip"
+  train_2018:
+    images: "dataset/2018/ISIC2018_Task3_Training_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Training_GroundTruth.zip"
+  val_2018:
+    images: "dataset/2018/ISIC2018_Task3_Validation_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Validation_GroundTruth.zip"
+  test_2018:
+    images: "dataset/2018/ISIC2018_Task3_Test_Input.zip"
+    labels: "dataset/2018/ISIC2018_Task3_Test_GroundTruth.zip"
 
   # Optimized settings for CPU
   image_size: [160, 160] # Reduced size for faster processing
